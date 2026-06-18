@@ -78,11 +78,14 @@ export default async function ThemeDetailPage({
             <ProjectCard
               key={project.id}
               title={project.title}
+              location={project.location}
               description={project.description}
               province={project.province}
               theme={theme.name}
               status={project.status}
               impactSummary={project.impactHeadline}
+              startDate={project.startDate}
+              endDate={project.endDate}
             />
           ))}
         </div>

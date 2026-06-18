@@ -17,9 +17,9 @@ Use it together with `TASKS.md`: this file explains what is actually present in 
 - Knowledge Hub page with search, filters, sorting, tag-aware discovery, and pagination
 - Theme detail page
 - Stakeholder detail page with relevant publications, projects, and explicit policy brief section
-- Project repository grid page
+- Project repository page with search, filters, and grid/map view toggle groundwork
 - Impact summary page
-- Basic API routes for publications and projects
+- Basic API routes for publications and projects, including filtered project responses
 - Responsive header with mobile navigation
 - Professionalized shell layout, card styling, and typography consistency
 - Phase 1 smoke validation via lint, type-check, production build, and local route/API checks
@@ -29,7 +29,7 @@ Use it together with `TASKS.md`: this file explains what is actually present in 
 ### Partially done
 - Design system: reusable UI primitives are still thin, but layout, typography, and card patterns are now more consistent
 - Content model: publications now support tags and richer seeded volume, but Phase 2/3 entity depth is still limited
-- Impact portal: page and aggregate metrics exist, but no charts, maps, or story detail pages
+- Impact portal: page and aggregate metrics exist, but no charts, true maps, or story detail pages
 - Mobile QA is improved for the header and core layouts, but there is still no automated viewport regression coverage
 
 ### Not done yet

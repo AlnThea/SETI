@@ -9,10 +9,10 @@ Planning lives in `.docs/TASKS.md`. Current code-state lives in `.docs/IMPLEMENT
 ## Current Status
 
 - Current sprint: Phase 2 Buildout
-- Next milestone: Deliver project repository depth beyond the baseline grid
-- Overall tracked progress: 50/155 tasks completed (32%)
+- Next milestone: Deliver project detail coverage and richer impact exploration
+- Overall tracked progress: 52/155 tasks completed (34%)
 - Phase 1: 43/53 tasks (81%)
-- Phase 2: 7/33 tasks (21%)
+- Phase 2: 9/33 tasks (27%)
 - Phase 3: 0/38 tasks (0%)
 - Phase 4: 0/31 tasks (0%)
 <!-- AUTO-GENERATED:DEVLOG-STATUS:END -->
@@ -31,7 +31,9 @@ Planning lives in `.docs/TASKS.md`. Current code-state lives in `.docs/IMPLEMENT
 - Reduced unnecessary Prisma payloads for knowledge, projects, and impact queries.
 - Added static prerendering for theme and stakeholder detail routes.
 - Synchronized `.docs/TASKS.md`, `.docs/IMPLEMENTATION_STATUS.md`, and `README.md` with the actual repository state.
-- Added `docs:sync` and a local `pre-commit` hook so status docs refresh before commits.
+- Added `docs:sync` so status docs can be refreshed from the command line.
+- Added project repository filtering by search, theme, status, and province.
+- Added grid/map repository view toggle groundwork and filtered project API support.
 
 ### Verification
 - `npm run lint`
@@ -42,7 +44,7 @@ Planning lives in `.docs/TASKS.md`. Current code-state lives in `.docs/IMPLEMENT
 ### Decisions
 - Keep `.docs/TASKS.md` as the checklist source of truth.
 - Keep `.docs/IMPLEMENTATION_STATUS.md` as the source of truth for implemented vs partial vs missing functionality.
-- Auto-sync documentation before commit, but do not auto-commit or auto-push.
+- Keep documentation sync manual through `npm run docs:sync`.
 
 ### Notes
 - The repo is no longer in planning-only state; README and DEVLOG now reflect that explicitly.

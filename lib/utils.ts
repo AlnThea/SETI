@@ -1,5 +1,11 @@
 import { clsx, type ClassValue } from "clsx";
-import type { KnowledgeSearchParams, KnowledgeSort } from "@/lib/types";
+import type {
+  KnowledgeSearchParams,
+  KnowledgeSort,
+  ProjectSearchParams,
+  ProjectStatus,
+  ProjectView
+} from "@/lib/types";
 
 export function cn(...inputs: ClassValue[]) {
   return clsx(inputs);
@@ -59,6 +65,21 @@ export function normalizeKnowledgeSearchParams(
   };
 }
 
+export function normalizeProjectSearchParams(
+  params:
+    | Partial<ProjectSearchParams>
+    | Partial<Record<keyof ProjectSearchParams, string | undefined>>
+    | undefined
+): ProjectSearchParams {
+  return {
+    q: params?.q?.trim() || "",
+    theme: params?.theme?.trim() || "",
+    status: isProjectStatus(params?.status) ? params.status : "",
+    province: params?.province?.trim() || "",
+    view: isProjectView(params?.view) ? params.view : "grid"
+  };
+}
+
 function isKnowledgeSort(value: string | undefined): value is KnowledgeSort {
   return value === "newest" || value === "oldest" || value === "featured" || value === "title-asc";
 }
@@ -84,4 +105,17 @@ function normalizePageValue(value: string | undefined) {
   }
 
   return parsed.toString();
+}
+
+function isProjectStatus(value: string | undefined): value is ProjectStatus {
+  return (
+    value === "PLANNING" ||
+    value === "ACTIVE" ||
+    value === "COMPLETED" ||
+    value === "ON_HOLD"
+  );
+}
+
+function isProjectView(value: string | undefined): value is ProjectView {
+  return value === "grid" || value === "map";
 }

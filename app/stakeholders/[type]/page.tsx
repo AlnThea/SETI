@@ -118,11 +118,14 @@ export default async function StakeholderDetailPage({
             <ProjectCard
               key={project.id}
               title={project.title}
+              location={project.location}
               description={project.description}
               province={project.province}
               theme={project.theme.name}
               status={project.status}
               impactSummary={project.impactHeadline}
+              startDate={project.startDate}
+              endDate={project.endDate}
             />
           ))}
         </div>

@@ -14,17 +14,17 @@ Track all tasks with status, priority, assignee, and completion dates.
 
 ### Setup & Foundation (Day 1)
 - [x] 🔴 Initialize Next.js 15 project with TypeScript
-- [ ] 🔴 Install Tailwind CSS and Shadcn/ui
-- [ ] 🔴 Configure ESLint & Prettier
+- [x] 🔴 Install Tailwind CSS and Shadcn/ui
+- [x] 🔴 Configure ESLint & Prettier
 - [x] 🔴 Create folder structure
-- [ ] 🔴 Initialize Git repository
+- [x] 🔴 Initialize Git repository
 - [x] 🔴 Setup environment variables
 
 ### Design System (Day 2)
 - [x] 🔴 Implement color palette (#0B6B4A, #0A5EA8, #F5B800)
 - [x] 🔴 Setup typography system (Inter font)
-- [ ] 🔴 Create Button, Card, Input components
-- [ ] 🟡 Create Badge, Modal components
+- [x] 🔴 Create Button, Card, Input components
+- [x] 🟡 Create Badge, Modal components
 - [x] 🔴 Setup responsive breakpoints
 - [x] 🔴 Create header and footer components
 - [x] 🔴 Implement navigation menu with mobile support
@@ -91,8 +91,8 @@ Track all tasks with status, priority, assignee, and completion dates.
 - [ ] 🔴 Setup Leaflet for interactive map
 - [ ] 🔴 Implement map view with location markers
 - [x] 🔴 Create project cards with location, theme, status, impact
-- [ ] 🔴 Add filters (by theme, location, status)
-- [ ] 🟡 Add view toggle (grid/map)
+- [x] 🔴 Add filters (by theme, location, status)
+- [x] 🟡 Add view toggle (grid/map)
 
 ### Project Detail Page (Day 16)
 - [ ] 🔴 Create project detail layout
@@ -233,7 +233,7 @@ Track all tasks with status, priority, assignee, and completion dates.
 
 ### By Phase
 - **Phase 1 (Knowledge Hub):** 43/53 tasks (81%)
-- **Phase 2 (Impact Portal):** 7/33 tasks (21%)
+- **Phase 2 (Impact Portal):** 9/33 tasks (27%)
 - **Phase 3 (Living Network):** 0/38 tasks (0%)
 - **Phase 4 (Polish & Deploy):** 0/31 tasks (0%)
 ### Tracking Note
@@ -241,7 +241,7 @@ Track all tasks with status, priority, assignee, and completion dates.
 - Priority-based totals are not recalculated yet; use the checked items above as the source of truth.
 
 ### Overall Progress
-**Total: 50/155 tasks completed (32%)**
+**Total: 52/155 tasks completed (34%)**
 
 ---
 
@@ -264,6 +264,8 @@ Track all tasks with status, priority, assignee, and completion dates.
 - Mobile header responsiveness hardening
 - Knowledge pagination guardrails and lighter query payloads
 - Static prerendering for theme and stakeholder detail routes
+- Project repository filtering by theme, status, province, and search query
+- Project repository grid/map view toggle groundwork plus filtered API support
 
 ### In Progress
 - Deepen content volume and Phase 2 feature coverage
@@ -272,9 +274,9 @@ Track all tasks with status, priority, assignee, and completion dates.
 *No blocked tasks*
 
 ### Next 3 Days
-1. Day 1: Add Phase 2 project repository filtering and map toggle groundwork
-2. Day 2: Start project detail page structure and content sections
-3. Day 3: Expand impact portal beyond aggregate cards
+1. Day 1: Start project detail page structure and content sections
+2. Day 2: Expand impact portal beyond aggregate cards
+3. Day 3: Begin map rendering layer on top of the new repository filters
 
 ---
 
@@ -308,5 +310,5 @@ Track all tasks with status, priority, assignee, and completion dates.
 
 **Last Updated:** 2026-06-18  
 **Current Sprint:** Phase 2 Buildout  
-**Next Milestone:** Deliver project repository depth beyond the baseline grid  
+**Next Milestone:** Deliver project detail coverage and richer impact exploration  
 **Competition Deadline:** [To be determined]

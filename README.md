@@ -11,7 +11,7 @@ A premium, donor-grade knowledge management platform showcasing Indonesia's sust
 - A searchable knowledge hub backed by local Prisma + SQLite data
 - Four theme pages and five stakeholder entry points with linked evidence
 - Seeded content set with 55 publications, tags, projects, and impact records
-- A project repository baseline and an impact summary baseline
+- A filterable project repository baseline and an impact summary baseline
 - A responsive UI shell already validated through lint, type-check, build, and smoke checks
 
 [![Next.js](https://img.shields.io/badge/Next.js-16-black)](https://nextjs.org/)
@@ -64,7 +64,7 @@ Built to match the quality and functionality of world-class platforms like:
 - **Knowledge Hub** with search, theme/type/year/tag filters, sort, and pagination
 - **Theme Detail Pages** for the four seeded themes
 - **Stakeholder Detail Pages** with relevant publications, projects, and policy brief section
-- **Projects Page** with seeded project grid
+- **Projects Page** with seeded project grid, search, filters, and view toggle groundwork
 - **Impact Page** with aggregate impact metrics and current project highlights
 - **Seeded Local Data** with 55 publications plus tags and linked entities
 
@@ -87,9 +87,9 @@ This repository is tracked from `.docs/TASKS.md` and `.docs/IMPLEMENTATION_STATU
 - Knowledge Hub page with search, filters, sorting, tag-aware discovery, and pagination
 - Theme detail page
 - Stakeholder detail page with relevant publications, projects, and explicit policy brief section
-- Project repository grid page
+- Project repository page with search, filters, and grid/map view toggle groundwork
 - Impact summary page
-- Basic API routes for publications and projects
+- Basic API routes for publications and projects, including filtered project responses
 - Responsive header with mobile navigation
 - Professionalized shell layout, card styling, and typography consistency
 - Phase 1 smoke validation via lint, type-check, production build, and local route/API checks
@@ -99,7 +99,7 @@ This repository is tracked from `.docs/TASKS.md` and `.docs/IMPLEMENTATION_STATU
 ### Partially implemented
 - Design system: reusable UI primitives are still thin, but layout, typography, and card patterns are now more consistent
 - Content model: publications now support tags and richer seeded volume, but Phase 2/3 entity depth is still limited
-- Impact portal: page and aggregate metrics exist, but no charts, maps, or story detail pages
+- Impact portal: page and aggregate metrics exist, but no charts, true maps, or story detail pages
 - Mobile QA is improved for the header and core layouts, but there is still no automated viewport regression coverage
 
 ### Not implemented yet
@@ -309,7 +309,6 @@ npm run start        # Start production server
 npm run lint         # Run ESLint
 npm run type-check   # Run TypeScript checks
 npm run docs:sync    # Sync README/TASKS progress and status blocks
-npm run hooks:install # Enable local git hooks for this clone
 
 # Database
 npm run db:push      # Push schema changes
@@ -322,7 +321,6 @@ npm run db:studio    # Open Prisma Studio
 - `.docs/TASKS.md` remains the primary checklist source of truth.
 - `.docs/IMPLEMENTATION_STATUS.md` remains the primary implementation-status source of truth.
 - `npm run docs:sync` recalculates tracked progress and refreshes the auto-generated status blocks in `README.md`.
-- `npm run hooks:install` configures this local clone to run `docs:sync` automatically before each commit and stage the updated docs.
 
 ### Development Workflow
 
@@ -420,17 +418,17 @@ We welcome contributions! Please follow these steps:
 
 ### Progress
 - ✅ Phase 1: Knowledge Hub (43/53 tracked tasks, 81%)
-- 🟡 Phase 2: Impact Portal (7/33 tracked tasks, 21%)
+- 🟡 Phase 2: Impact Portal (9/33 tracked tasks, 27%)
 - ⚪ Phase 3: Living Network (0/38 tracked tasks, 0%)
 - ⚪ Phase 4: Polish & Deploy (0/31 tracked tasks, 0%)
 
 ### Next Milestone
-Deliver project repository depth beyond the baseline grid
+Deliver project detail coverage and richer impact exploration
 
 ### Next 3 Priorities
-1. Day 1: Add Phase 2 project repository filtering and map toggle groundwork
-2. Day 2: Start project detail page structure and content sections
-3. Day 3: Expand impact portal beyond aggregate cards
+1. Day 1: Start project detail page structure and content sections
+2. Day 2: Expand impact portal beyond aggregate cards
+3. Day 3: Begin map rendering layer on top of the new repository filters
 <!-- AUTO-GENERATED:STATUS:END -->
 
 ---

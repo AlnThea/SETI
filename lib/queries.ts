@@ -1,6 +1,7 @@
 import { prisma } from "@/lib/prisma";
 import type {
   KnowledgeSearchParams,
+  ProjectSearchParams,
   KnowledgeSort,
   StakeholderType,
   ThemeSlug
@@ -273,23 +274,71 @@ function buildPublishedAtWhere(year?: string, from?: string, to?: string) {
   return { publishedAt };
 }
 
-export async function getProjects() {
-  return prisma.project.findMany({
-    orderBy: [{ status: "asc" }, { startDate: "desc" }],
-    select: {
-      id: true,
-      title: true,
-      description: true,
-      province: true,
-      status: true,
-      impactHeadline: true,
-      theme: {
-        select: {
-          name: true
+export async function getProjects(filters?: ProjectSearchParams) {
+  const where = {
+    ...(filters?.q
+      ? {
+          OR: [
+            { title: { contains: filters.q } },
+            { description: { contains: filters.q } },
+            { impactHeadline: { contains: filters.q } },
+            { province: { contains: filters.q } },
+            { location: { contains: filters.q } }
+          ]
+        }
+      : {}),
+    ...(filters?.theme ? { theme: { slug: filters.theme } } : {}),
+    ...(filters?.status ? { status: filters.status } : {}),
+    ...(filters?.province ? { province: filters.province } : {})
+  };
+
+  const [projects, themes, provinceRows] = await Promise.all([
+    prisma.project.findMany({
+      where,
+      orderBy: [{ status: "asc" }, { startDate: "desc" }],
+      select: {
+        id: true,
+        title: true,
+        slug: true,
+        description: true,
+        province: true,
+        location: true,
+        status: true,
+        impactHeadline: true,
+        startDate: true,
+        endDate: true,
+        theme: {
+          select: {
+            name: true,
+            slug: true
+          }
         }
       }
+    }),
+    prisma.theme.findMany({
+      orderBy: { name: "asc" },
+      select: {
+        id: true,
+        name: true,
+        slug: true
+      }
+    }),
+    prisma.project.findMany({
+      distinct: ["province"],
+      orderBy: { province: "asc" },
+      select: {
+        province: true
+      }
+    })
+  ]);
+
+  return {
+    projects,
+    filters: {
+      themes,
+      provinces: provinceRows.map((item) => item.province)
     }
-  });
+  };
 }
 
 export async function getImpactHighlights() {

@@ -19,6 +19,7 @@ export type PublicationType =
   | "TOOLKIT";
 
 export type ProjectStatus = "PLANNING" | "ACTIVE" | "COMPLETED" | "ON_HOLD";
+export type ProjectView = "grid" | "map";
 
 export type KnowledgeSort =
   | "newest"
@@ -41,4 +42,12 @@ export interface KnowledgeSearchParams {
 export interface ThemeStat {
   label: string;
   value: string;
+}
+
+export interface ProjectSearchParams {
+  q?: string;
+  theme?: string;
+  status?: ProjectStatus | "";
+  province?: string;
+  view?: ProjectView;
 }
