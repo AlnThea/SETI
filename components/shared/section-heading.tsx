@@ -10,9 +10,9 @@ export function SectionHeading({
   description
 }: SectionHeadingProps) {
   return (
-    <div className="max-w-3xl space-y-3">
+    <div className="max-w-3xl space-y-4">
       <p className="eyebrow">{eyebrow}</p>
-      <h2 className="text-3xl font-semibold tracking-tight text-[var(--foreground)] md:text-4xl">
+      <h2 className="text-3xl font-semibold text-[var(--foreground)] md:text-4xl">
         {title}
       </h2>
       <p className="text-base leading-7 text-[var(--muted)] md:text-lg">
@@ -21,4 +21,3 @@ export function SectionHeading({
     </div>
   );
 }
-

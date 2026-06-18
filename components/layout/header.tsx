@@ -1,39 +1,36 @@
 import Link from "next/link";
-import { BookOpenText, ChartColumnIncreasing, Network } from "lucide-react";
-
-const links = [
-  { href: "/knowledge", label: "Knowledge Hub", icon: BookOpenText },
-  { href: "/impact", label: "Impact", icon: ChartColumnIncreasing },
-  { href: "/projects", label: "Projects", icon: Network }
-];
+import { ArrowUpRight } from "lucide-react";
+import { SiteNavigation } from "@/components/layout/site-navigation";
 
 export function Header() {
   return (
-    <header className="border-b border-[var(--border)] bg-white/95 backdrop-blur">
-      <div className="container-shell flex items-center justify-between gap-6 py-4">
-        <Link href="/" className="flex flex-col">
-          <span className="text-lg font-semibold tracking-tight text-[var(--foreground)]">
-            SETI Knowledge & Impact Hub
-          </span>
-          <span className="text-sm text-[var(--muted)]">
-            Indonesia&apos;s energy transition evidence platform
-          </span>
+    <header className="sticky top-0 z-40 border-b border-[var(--border)] bg-[rgba(247,250,248,0.9)] backdrop-blur-xl">
+      <div className="container-shell flex min-h-[84px] items-center justify-between gap-6">
+        <Link href="/" className="flex items-center gap-4">
+          <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[var(--foreground)] text-sm font-semibold text-white">
+            ST
+          </div>
+          <div className="flex flex-col">
+            <span className="text-base font-semibold text-[var(--foreground)] md:text-lg">
+              SETI Knowledge & Impact Hub
+            </span>
+            <span className="text-sm text-[var(--muted)]">
+              Indonesia&apos;s energy transition evidence platform
+            </span>
+          </div>
         </Link>
 
-        <nav className="flex flex-wrap items-center gap-2">
-          {links.map(({ href, label, icon: Icon }) => (
-            <Link
-              key={href}
-              href={href}
-              className="inline-flex items-center gap-2 rounded-md border border-[var(--border)] px-3 py-2 text-sm text-[var(--foreground)] transition hover:border-[var(--energy)] hover:text-[var(--energy)]"
-            >
-              <Icon className="h-4 w-4" />
-              <span>{label}</span>
-            </Link>
-          ))}
-        </nav>
+        <div className="flex items-center gap-3">
+          <Link
+            href="/knowledge"
+            className="hidden items-center gap-2 rounded-full bg-[var(--primary)] px-4 py-2.5 text-sm font-medium text-white transition hover:opacity-90 lg:inline-flex"
+          >
+            Explore knowledge
+            <ArrowUpRight className="h-4 w-4" />
+          </Link>
+          <SiteNavigation />
+        </div>
       </div>
     </header>
   );
 }
-

@@ -56,8 +56,8 @@ export default async function HomePage() {
       <section className="container-shell space-y-8">
         <SectionHeading
           eyebrow="Featured Knowledge"
-          title="Anchor content for the first prototype."
-          description="Featured items are loaded from the local database so the content model is already wired for future CMS or Supabase migration."
+          title="Evidence that anchors the current prototype."
+          description="Featured items are loaded from the local database so the content model is already wired for richer discovery, filtering, and later CMS migration."
         />
         <div className="grid gap-4 lg:grid-cols-2">
           {featuredPublications.map((item) => (
@@ -70,7 +70,9 @@ export default async function HomePage() {
               themeName={item.theme.name}
               themeSlug={item.theme.slug}
               organizationName={item.organizationName}
-              dateLabel={item.publishedAt?.getFullYear().toString() ?? "Draft"}
+              publishedAt={item.publishedAt}
+              featured={item.featured}
+              tags={item.tags}
             />
           ))}
         </div>

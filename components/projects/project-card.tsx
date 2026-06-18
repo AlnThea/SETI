@@ -18,22 +18,21 @@ export function ProjectCard({
   impactSummary
 }: ProjectCardProps) {
   return (
-    <article className="surface rounded-lg p-6">
+    <article className="surface-card p-6">
       <div className="flex flex-wrap items-center gap-3 text-sm text-[var(--muted)]">
-        <span className="rounded-full bg-[#f4f8fd] px-3 py-1 text-[var(--energy)]">
+        <span className="rounded-full bg-[var(--soft-blue)] px-3 py-1 font-medium text-[var(--energy)]">
           {theme}
         </span>
         <span>{province}</span>
         <span>{formatProjectStatus(status)}</span>
       </div>
       <div className="mt-5 space-y-3">
-        <h3 className="text-xl font-semibold tracking-tight text-[var(--foreground)]">
-          {title}
-        </h3>
+        <h3 className="text-xl font-semibold text-[var(--foreground)]">{title}</h3>
         <p className="text-sm leading-6 text-[var(--muted)]">{description}</p>
       </div>
-      <p className="mt-5 text-sm font-medium text-[var(--primary)]">{impactSummary}</p>
+      <p className="mt-5 rounded-2xl bg-[var(--soft-green)] p-4 text-sm font-medium text-[var(--primary)]">
+        {impactSummary}
+      </p>
     </article>
   );
 }
-

@@ -1,5 +1,12 @@
 import { prisma } from "@/lib/prisma";
-import type { StakeholderType, ThemeSlug } from "@/lib/types";
+import type {
+  KnowledgeSearchParams,
+  KnowledgeSort,
+  StakeholderType,
+  ThemeSlug
+} from "@/lib/types";
+
+const KNOWLEDGE_PAGE_SIZE = 12;
 
 export async function getHomepageData() {
   const [themes, stakeholders, featuredPublications, stats] = await Promise.all([
@@ -21,7 +28,8 @@ export async function getHomepageData() {
       take: 4,
       orderBy: [{ featured: "desc" }, { publishedAt: "desc" }],
       include: {
-        theme: true
+        theme: true,
+        tags: true
       }
     }),
     getPlatformStats()
@@ -50,23 +58,89 @@ export async function getPlatformStats() {
   ];
 }
 
-export async function getKnowledgePageData(search?: string) {
-  return prisma.publication.findMany({
-    where: search
+export async function getKnowledgePageData(filters: KnowledgeSearchParams) {
+  const currentPage = Number.parseInt(filters.page ?? "1", 10) || 1;
+  const where = {
+    ...(filters.q
       ? {
           OR: [
-            { title: { contains: search } },
-            { summary: { contains: search } },
-            { organization: { name: { contains: search } } }
+            { title: { contains: filters.q } },
+            { summary: { contains: filters.q } },
+            { organization: { name: { contains: filters.q } } },
+            { tags: { some: { name: { contains: filters.q } } } }
           ]
         }
-      : undefined,
-    orderBy: [{ featured: "desc" }, { publishedAt: "desc" }],
-    include: {
-      theme: true,
-      organization: true
+      : {}),
+    ...(filters.theme ? { theme: { slug: filters.theme } } : {}),
+    ...(filters.type ? { type: filters.type } : {}),
+    ...(filters.tag ? { tags: { some: { slug: filters.tag } } } : {}),
+    ...buildPublishedAtWhere(filters.year, filters.from, filters.to)
+  };
+
+  const [publications, totalCount, themes, tags, years] = await Promise.all([
+    prisma.publication.findMany({
+      where,
+      orderBy: buildKnowledgeSort(filters.sort),
+      skip: (currentPage - 1) * KNOWLEDGE_PAGE_SIZE,
+      take: KNOWLEDGE_PAGE_SIZE,
+      include: {
+        theme: true,
+        organization: true,
+        tags: {
+          orderBy: {
+            name: "asc"
+          }
+        }
+      }
+    }),
+    prisma.publication.count({ where }),
+    prisma.theme.findMany({
+      orderBy: { name: "asc" },
+      select: {
+        id: true,
+        name: true,
+        slug: true
+      }
+    }),
+    prisma.tag.findMany({
+      orderBy: { name: "asc" },
+      select: {
+        id: true,
+        name: true,
+        slug: true
+      }
+    }),
+    prisma.publication.findMany({
+      where: {
+        publishedAt: {
+          not: null
+        }
+      },
+      orderBy: { publishedAt: "desc" },
+      select: { publishedAt: true }
+    })
+  ]);
+
+  return {
+    publications,
+    pagination: {
+      page: currentPage,
+      pageSize: KNOWLEDGE_PAGE_SIZE,
+      totalCount,
+      totalPages: Math.max(1, Math.ceil(totalCount / KNOWLEDGE_PAGE_SIZE))
+    },
+    filters: {
+      themes,
+      tags,
+      years: Array.from(
+        new Set(
+          years
+            .map((item) => item.publishedAt?.getFullYear().toString())
+            .filter((year): year is string => Boolean(year))
+        )
+      )
     }
-  });
+  };
 }
 
 export async function getThemeDetail(slug: ThemeSlug) {
@@ -77,7 +151,8 @@ export async function getThemeDetail(slug: ThemeSlug) {
         take: 6,
         orderBy: [{ featured: "desc" }, { publishedAt: "desc" }],
         include: {
-          organization: true
+          organization: true,
+          tags: true
         }
       },
       projects: {
@@ -107,15 +182,16 @@ export async function getThemeDetail(slug: ThemeSlug) {
 }
 
 export async function getStakeholderDetail(type: StakeholderType) {
-  return prisma.stakeholder.findUnique({
+  const stakeholder = await prisma.stakeholder.findUnique({
     where: { type },
     include: {
       publications: {
-        take: 6,
+        take: 8,
         orderBy: [{ featured: "desc" }, { publishedAt: "desc" }],
         include: {
           theme: true,
-          organization: true
+          organization: true,
+          tags: true
         }
       },
       projects: {
@@ -127,6 +203,74 @@ export async function getStakeholderDetail(type: StakeholderType) {
       }
     }
   });
+
+  if (!stakeholder) {
+    return null;
+  }
+
+  const policyBriefs = await prisma.publication.findMany({
+    where: {
+      type: "POLICY_BRIEF",
+      stakeholders: {
+        some: {
+          id: stakeholder.id
+        }
+      }
+    },
+    take: 4,
+    orderBy: [{ featured: "desc" }, { publishedAt: "desc" }],
+    include: {
+      theme: true,
+      organization: true,
+      tags: true
+    }
+  });
+
+  return {
+    ...stakeholder,
+    policyBriefs
+  };
+}
+
+function buildKnowledgeSort(sort: KnowledgeSort | undefined) {
+  switch (sort) {
+    case "newest":
+      return [{ publishedAt: "desc" as const }, { title: "asc" as const }];
+    case "oldest":
+      return [{ publishedAt: "asc" as const }, { title: "asc" as const }];
+    case "title-asc":
+      return [{ title: "asc" as const }];
+    case "featured":
+    default:
+      return [
+        { featured: "desc" as const },
+        { publishedAt: "desc" as const },
+        { title: "asc" as const }
+      ];
+  }
+}
+
+function buildPublishedAtWhere(year?: string, from?: string, to?: string) {
+  if (!year && !from && !to) {
+    return {};
+  }
+
+  const publishedAt: { gte?: Date; lte?: Date } = {};
+
+  if (year) {
+    publishedAt.gte = new Date(`${year}-01-01T00:00:00.000Z`);
+    publishedAt.lte = new Date(`${year}-12-31T23:59:59.999Z`);
+  }
+
+  if (from) {
+    publishedAt.gte = new Date(`${from}T00:00:00.000Z`);
+  }
+
+  if (to) {
+    publishedAt.lte = new Date(`${to}T23:59:59.999Z`);
+  }
+
+  return { publishedAt };
 }
 
 export async function getProjects() {

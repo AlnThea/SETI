@@ -80,8 +80,18 @@ model Publication {
   theme            Theme           @relation(fields: [themeId], references: [id])
   organization     Organization?   @relation(fields: [organizationId], references: [id])
   stakeholders     Stakeholder[]
+  tags             Tag[]
   createdAt        DateTime        @default(now())
   updatedAt        DateTime        @updatedAt
+}
+
+model Tag {
+  id           String        @id @default(cuid())
+  name         String        @unique
+  slug         String        @unique
+  publications Publication[]
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
 }
 
 model Project {
@@ -141,4 +151,3 @@ model Expert {
   themeId     String
   theme       Theme    @relation(fields: [themeId], references: [id])
 }
-

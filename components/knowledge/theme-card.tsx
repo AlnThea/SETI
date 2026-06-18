@@ -16,20 +16,37 @@ export function ThemeCard({
   projectCount
 }: ThemeCardProps) {
   return (
-    <Link href={`/themes/${slug}`} className="surface rounded-lg p-6 transition hover:-translate-y-0.5 hover:shadow-md">
+    <Link
+      href={`/themes/${slug}`}
+      className="surface-card p-6 transition hover:-translate-y-0.5"
+    >
       <div className="space-y-4">
         <div className="space-y-2">
-          <h3 className="text-xl font-semibold tracking-tight text-[var(--foreground)]">
-            {name}
-          </h3>
+          <p className="text-sm font-medium uppercase tracking-[0.12em] text-[var(--energy)]">
+            Theme
+          </p>
+          <h3 className="text-xl font-semibold text-[var(--foreground)]">{name}</h3>
           <p className="text-sm leading-6 text-[var(--muted)]">{description}</p>
         </div>
-        <div className="flex gap-6 text-sm text-[var(--muted)]">
-          <span>{publicationCount} publications</span>
-          <span>{projectCount} projects</span>
+        <div className="grid grid-cols-2 gap-3">
+          <div className="rounded-2xl bg-[var(--surface-subtle)] p-4">
+            <p className="text-xs uppercase tracking-[0.12em] text-[var(--muted)]">
+              Publications
+            </p>
+            <p className="mt-2 text-2xl font-semibold text-[var(--foreground)]">
+              {publicationCount}
+            </p>
+          </div>
+          <div className="rounded-2xl bg-[var(--soft-blue)] p-4">
+            <p className="text-xs uppercase tracking-[0.12em] text-[var(--muted)]">
+              Projects
+            </p>
+            <p className="mt-2 text-2xl font-semibold text-[var(--foreground)]">
+              {projectCount}
+            </p>
+          </div>
         </div>
       </div>
     </Link>
   );
 }
-

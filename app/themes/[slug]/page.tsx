@@ -17,7 +17,7 @@ export default async function ThemeDetailPage({
   }
 
   return (
-    <div className="container-shell space-y-12 py-14">
+    <div className="container-shell space-y-12 py-10 md:py-14">
       <SectionHeading
         eyebrow="Theme Detail"
         title={theme.name}
@@ -25,15 +25,15 @@ export default async function ThemeDetailPage({
       />
 
       <div className="grid gap-4 md:grid-cols-3">
-        <div className="surface rounded-lg p-6">
+        <div className="surface-card p-6">
           <p className="text-sm text-[var(--muted)]">Publications</p>
           <p className="mt-2 text-3xl font-semibold">{theme._count.publications}</p>
         </div>
-        <div className="surface rounded-lg p-6">
+        <div className="surface-card p-6">
           <p className="text-sm text-[var(--muted)]">Projects</p>
           <p className="mt-2 text-3xl font-semibold">{theme._count.projects}</p>
         </div>
-        <div className="surface rounded-lg p-6">
+        <div className="surface-card p-6">
           <p className="text-sm text-[var(--muted)]">Policies</p>
           <p className="mt-2 text-3xl font-semibold">{theme._count.policies}</p>
         </div>
@@ -52,7 +52,9 @@ export default async function ThemeDetailPage({
               themeName={theme.name}
               themeSlug={theme.slug}
               organizationName={item.organizationName}
-              dateLabel={item.publishedAt?.getFullYear().toString() ?? "Draft"}
+              publishedAt={item.publishedAt}
+              featured={item.featured}
+              tags={item.tags}
             />
           ))}
         </div>
@@ -76,7 +78,7 @@ export default async function ThemeDetailPage({
       </section>
 
       <section className="grid gap-4 lg:grid-cols-3">
-        <div className="surface rounded-lg p-6">
+        <div className="surface-card p-6">
           <h3 className="text-lg font-semibold">Related policies</h3>
           <ul className="mt-4 space-y-3 text-sm leading-6 text-[var(--muted)]">
             {theme.policies.map((policy) => (
@@ -84,7 +86,7 @@ export default async function ThemeDetailPage({
             ))}
           </ul>
         </div>
-        <div className="surface rounded-lg p-6">
+        <div className="surface-card p-6">
           <h3 className="text-lg font-semibold">Related events</h3>
           <ul className="mt-4 space-y-3 text-sm leading-6 text-[var(--muted)]">
             {theme.events.map((event) => (
@@ -92,7 +94,7 @@ export default async function ThemeDetailPage({
             ))}
           </ul>
         </div>
-        <div className="surface rounded-lg p-6">
+        <div className="surface-card p-6">
           <h3 className="text-lg font-semibold">Related experts</h3>
           <ul className="mt-4 space-y-3 text-sm leading-6 text-[var(--muted)]">
             {theme.experts.map((expert) => (

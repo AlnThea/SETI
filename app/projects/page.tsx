@@ -6,7 +6,7 @@ export default async function ProjectsPage() {
   const projects = await getProjects();
 
   return (
-    <div className="container-shell space-y-10 py-14">
+    <div className="container-shell space-y-10 py-10 md:py-14">
       <SectionHeading
         eyebrow="Project Repository"
         title="Implementation projects with location, status, and impact signals."
@@ -29,4 +29,3 @@ export default async function ProjectsPage() {
     </div>
   );
 }
-
