@@ -8,6 +8,8 @@
     "start": "next start",
     "lint": "eslint .",
     "type-check": "tsc --noEmit",
+    "docs:sync": "node scripts/sync-doc-status.mjs",
+    "hooks:install": "git config core.hooksPath .githooks",
     "db:push": "prisma db push",
     "db:seed": "prisma db seed",
     "db:studio": "prisma studio"

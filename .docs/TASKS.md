@@ -77,9 +77,9 @@ Track all tasks with status, priority, assignee, and completion dates.
 - [x] 🔴 Create 4 theme descriptions (Industrial Decarbonization, Green Buildings, etc.)
 - [x] 🔴 Create 5 stakeholder profiles
 - [x] 🔴 Generate realistic metadata
-- [ ] 🔴 Test all Phase 1 features
-- [ ] 🔴 Performance optimization
-- [ ] 🔴 Mobile responsiveness check
+- [x] 🔴 Test all Phase 1 features
+- [x] 🔴 Performance optimization
+- [x] 🔴 Mobile responsiveness check
 
 ---
 
@@ -232,24 +232,23 @@ Track all tasks with status, priority, assignee, and completion dates.
 ## 📊 Progress Summary
 
 ### By Phase
-- **Phase 1 (Knowledge Hub):** 41/45 tasks (91%)
-- **Phase 2 (Impact Portal):** 7/25 tasks (28%)
-- **Phase 3 (Living Network):** 0/28 tasks (0%)
-- **Phase 4 (Polish & Deploy):** 0/28 tasks (0%)
-
+- **Phase 1 (Knowledge Hub):** 43/53 tasks (81%)
+- **Phase 2 (Impact Portal):** 7/33 tasks (21%)
+- **Phase 3 (Living Network):** 0/38 tasks (0%)
+- **Phase 4 (Polish & Deploy):** 0/31 tasks (0%)
 ### Tracking Note
 - Progress above is synchronized to the current scaffold in the repository.
 - Priority-based totals are not recalculated yet; use the checked items above as the source of truth.
 
 ### Overall Progress
-**Total: 48/126 tasks completed (38%)**
+**Total: 50/155 tasks completed (32%)**
 
 ---
 
 ## 🔄 Quick Status Updates
 
 ### Today's Focus
-*Close the remaining high-value Phase 1 gaps and verify the upgraded UI shell.*
+*Shift from Phase 1 completion into Phase 2 feature depth after finishing QA and baseline optimization.*
 
 ### Recently Completed
 - Initial Next.js App Router scaffold
@@ -261,18 +260,21 @@ Track all tasks with status, priority, assignee, and completion dates.
 - Manual runtime validation with Prisma push/seed, lint, type-check, and production build
 - Stakeholder policy brief section and knowledge pagination
 - Publication dataset expanded to 55 seeded items
+- Phase 1 smoke validation across primary pages and API routes
+- Mobile header responsiveness hardening
+- Knowledge pagination guardrails and lighter query payloads
+- Static prerendering for theme and stakeholder detail routes
 
 ### In Progress
-- Complete remaining Phase 1 validation, responsiveness QA, and performance work
 - Deepen content volume and Phase 2 feature coverage
 
 ### Blocked
 *No blocked tasks*
 
 ### Next 3 Days
-1. Day 1: Project setup and initialization
-2. Day 2: Complete design system implementation
-3. Day 3: Finish Knowledge Hub filtering and content depth
+1. Day 1: Add Phase 2 project repository filtering and map toggle groundwork
+2. Day 2: Start project detail page structure and content sections
+3. Day 3: Expand impact portal beyond aggregate cards
 
 ---
 
@@ -305,6 +307,6 @@ Track all tasks with status, priority, assignee, and completion dates.
 ---
 
 **Last Updated:** 2026-06-18  
-**Current Sprint:** Phase 1 UX Completion  
-**Next Milestone:** Finish remaining Phase 1 QA and optimization tasks  
+**Current Sprint:** Phase 2 Buildout  
+**Next Milestone:** Deliver project repository depth beyond the baseline grid  
 **Competition Deadline:** [To be determined]

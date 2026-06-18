@@ -4,12 +4,20 @@
 
 A premium, donor-grade knowledge management platform showcasing Indonesia's sustainable energy transition journey through publications, projects, policies, and measurable impact.
 
-**🎯 Production-Ready | 🧩 Modular Architecture | 🔒 Enterprise Security**
+**Current baseline: working Phase 1 knowledge hub with initial Phase 2 pages**
 
-[![Next.js](https://img.shields.io/badge/Next.js-15-black)](https://nextjs.org/)
-[![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue)](https://www.typescriptlang.org/)
-[![Tailwind CSS](https://img.shields.io/badge/Tailwind-3.0-38bdf8)](https://tailwindcss.com/)
-[![Gemini AI](https://img.shields.io/badge/Gemini-AI-orange)](https://ai.google.dev/)
+### What Can Be Demoed Now
+
+- A searchable knowledge hub backed by local Prisma + SQLite data
+- Four theme pages and five stakeholder entry points with linked evidence
+- Seeded content set with 55 publications, tags, projects, and impact records
+- A project repository baseline and an impact summary baseline
+- A responsive UI shell already validated through lint, type-check, build, and smoke checks
+
+[![Next.js](https://img.shields.io/badge/Next.js-16-black)](https://nextjs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5-blue)](https://www.typescriptlang.org/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind-4-38bdf8)](https://tailwindcss.com/)
+[![Prisma](https://img.shields.io/badge/Prisma-6-2D3748)](https://www.prisma.io/)
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE.md)
 
 ---
@@ -51,26 +59,59 @@ Built to match the quality and functionality of world-class platforms like:
 
 ## ✨ Features
 
-### 📚 Phase 1: Knowledge Hub
-- **Smart Search** - Find publications, reports, policy briefs, and case studies
-- **Theme Explorer** - Browse by Industrial Decarbonization, Green Buildings, Sustainable Finance, Energy Policy
-- **Stakeholder Portal** - Tailored resources for each audience type
-- **Related Knowledge** - Discover connections between content
-- **Advanced Filters** - Filter by type, theme, date, organization
+### Implemented now
+- **Homepage** with hero search, stats, theme cards, stakeholder cards, and featured knowledge
+- **Knowledge Hub** with search, theme/type/year/tag filters, sort, and pagination
+- **Theme Detail Pages** for the four seeded themes
+- **Stakeholder Detail Pages** with relevant publications, projects, and policy brief section
+- **Projects Page** with seeded project grid
+- **Impact Page** with aggregate impact metrics and current project highlights
+- **Seeded Local Data** with 55 publications plus tags and linked entities
 
-### 📊 Phase 2: Impact Portal
-- **Project Repository** - Grid and interactive map views of implementation projects
-- **Impact Dashboard** - Real-time metrics (CO2 reduction, energy savings, buildings supported)
-- **Impact Stories** - Challenge → Intervention → Results → Lessons Learned
-- **Policy Navigator** - Visual journey from policy to practice to replication
-- **Interactive Charts** - Bar charts, line graphs, and data visualizations
+### In progress / next
+- **Phase 2 expansion** - project filters, map toggle, project detail pages, richer impact views
+- **Phase 3 exploration** - graph, atlas, timeline, and semantic discovery are not implemented yet
 
-### 🌐 Phase 3: Living Knowledge Network
-- **Knowledge Explorer** - Interactive network graph of relationships
-- **Knowledge Graph** - Visualize connections between themes, projects, policies, experts
-- **Energy Transition Atlas** - Interactive Indonesia map with regional data
-- **Knowledge Timeline** - Chronological view of policy → research → pilot → impact
-- **Semantic Discovery** - AI-powered natural language search (Gemini API)
+## 🧭 Current Implementation Snapshot
+
+This repository is tracked from `.docs/TASKS.md` and `.docs/IMPLEMENTATION_STATUS.md`. The summary below is meant to describe the actual codebase, not the full target vision.
+
+<!-- AUTO-GENERATED:SNAPSHOT:START -->
+### Working today
+- Next.js App Router scaffold
+- TypeScript project config
+- Tailwind-based global styling baseline with Inter typography
+- Prisma ORM with local SQLite database
+- Seed script with 55 SETI sample publications plus publication tags
+- Homepage
+- Knowledge Hub page with search, filters, sorting, tag-aware discovery, and pagination
+- Theme detail page
+- Stakeholder detail page with relevant publications, projects, and explicit policy brief section
+- Project repository grid page
+- Impact summary page
+- Basic API routes for publications and projects
+- Responsive header with mobile navigation
+- Professionalized shell layout, card styling, and typography consistency
+- Phase 1 smoke validation via lint, type-check, production build, and local route/API checks
+- Knowledge pagination now clamps out-of-range page values
+- Theme and stakeholder detail routes now prerender via static params
+
+### Partially implemented
+- Design system: reusable UI primitives are still thin, but layout, typography, and card patterns are now more consistent
+- Content model: publications now support tags and richer seeded volume, but Phase 2/3 entity depth is still limited
+- Impact portal: page and aggregate metrics exist, but no charts, maps, or story detail pages
+- Mobile QA is improved for the header and core layouts, but there is still no automated viewport regression coverage
+
+### Not implemented yet
+- Shadcn/ui integration
+- Publication detail pages
+- Project detail pages
+- Leaflet map view
+- Recharts dashboards
+- Knowledge graph / D3
+- Gemini AI integration
+- Deployment and QA hardening
+<!-- AUTO-GENERATED:SNAPSHOT:END -->
 
 ---
 
@@ -78,48 +119,23 @@ Built to match the quality and functionality of world-class platforms like:
 
 ### Frontend
 ```
-Next.js 15 (App Router)
-├── React 18
+Next.js 16 (App Router)
+├── React 19
 ├── TypeScript
 ├── Tailwind CSS
-├── Shadcn/ui (Radix UI components)
-├── Framer Motion (animations)
-└── React Query (data fetching)
-```
-
-### Visualization
-```
-D3.js - Network graphs & force-directed layouts
-Recharts - Charts & dashboards
-Leaflet - Interactive maps
-React Flow - Node-based diagrams
+└── Lucide React
 ```
 
 ### Backend
 ```
 Next.js API Routes
 ├── Prisma ORM
-├── PostgreSQL (Supabase)
-├── Gemini AI API
-└── NextAuth.js (optional)
-```
-
-### AI Integration
-```
-Google Gemini API
-├── Semantic search
-├── Content summarization
-├── Smart recommendations
-└── Natural language queries
+└── SQLite (current local development database)
 ```
 
 ### Deployment
 ```
-Vercel
-├── Auto-deploy from GitHub
-├── Edge functions
-├── Analytics
-└── Environment variables
+Not configured yet
 ```
 
 ---
@@ -129,9 +145,7 @@ Vercel
 ### Prerequisites
 
 - Node.js 18+ and npm/yarn/pnpm
-- Git
-- Supabase account (free tier)
-- Google Gemini API key (free tier)
+- npm
 
 ### Quick Start
 
@@ -152,16 +166,13 @@ pnpm install
 
 3. **Setup environment variables**
 ```bash
-cp .env.example .env.local
+copy .env.example .env
 ```
 
-Edit `.env.local` with your credentials:
+Edit `.env` if needed:
 ```env
 # Database
-DATABASE_URL="your-supabase-connection-string"
-
-# Gemini AI
-GEMINI_API_KEY="your-gemini-api-key"
+DATABASE_URL="file:./dev.db"
 
 # Next.js
 NEXT_PUBLIC_APP_URL="http://localhost:3000"
@@ -188,7 +199,7 @@ pnpm dev
 http://localhost:3000
 ```
 
-For detailed installation instructions, see [INSTALLATION.md](INSTALLATION.md)
+For detailed installation instructions, see [.docs/INSTALLATION.md](.docs/INSTALLATION.md)
 
 ---
 
@@ -216,7 +227,7 @@ seti-knowledge-hub/
 │   └── prompt c.md                  # Phase 3: Living Network
 │
 ├── 🎨 Application (app/)
-│   ├── Next.js 15 App Router
+│   ├── Next.js 16 App Router
 │   ├── API Routes
 │   └── Pages & Layouts
 │
@@ -255,7 +266,7 @@ All documentation is organized in the `.docs/` folder:
 
 ### 🎯 Planning & Management
 - **[.docs/PLANNING.md](.docs/PLANNING.md)** - Project roadmap & timeline
-- **[.docs/TASKS.md](.docs/TASKS.md)** - Task tracking (126 tasks)
+- **[.docs/TASKS.md](.docs/TASKS.md)** - Task tracking (155 checklist items currently tracked)
 - **[.docs/DEVLOG.md](.docs/DEVLOG.md)** - Development journal
 
 ### 🛠️ Technical Docs
@@ -296,19 +307,22 @@ npm run dev          # Start dev server
 npm run build        # Build for production
 npm run start        # Start production server
 npm run lint         # Run ESLint
-npm run format       # Format with Prettier
+npm run type-check   # Run TypeScript checks
+npm run docs:sync    # Sync README/TASKS progress and status blocks
+npm run hooks:install # Enable local git hooks for this clone
 
 # Database
 npm run db:push      # Push schema changes
 npm run db:seed      # Seed database
 npm run db:studio    # Open Prisma Studio
-npm run db:reset     # Reset database
-
-# Testing
-npm run test         # Run tests
-npm run test:watch   # Run tests in watch mode
-npm run test:e2e     # Run E2E tests
 ```
+
+### Documentation Automation
+
+- `.docs/TASKS.md` remains the primary checklist source of truth.
+- `.docs/IMPLEMENTATION_STATUS.md` remains the primary implementation-status source of truth.
+- `npm run docs:sync` recalculates tracked progress and refreshes the auto-generated status blocks in `README.md`.
+- `npm run hooks:install` configures this local clone to run `docs:sync` automatically before each commit and stage the updated docs.
 
 ### Development Workflow
 
@@ -359,7 +373,6 @@ git push origin main
 3. **Configure Environment Variables**
 Add these in Vercel dashboard:
 - `DATABASE_URL`
-- `GEMINI_API_KEY`
 - `NEXT_PUBLIC_APP_URL`
 
 4. **Setup Database**
@@ -401,22 +414,24 @@ We welcome contributions! Please follow these steps:
 
 ## 📊 Project Status
 
+<!-- AUTO-GENERATED:STATUS:START -->
 ### Current Phase
-🟢 **Planning & Documentation** (Week 0)
+🟡 **Phase 2 Buildout**
 
 ### Progress
-- ✅ Phase 0: Planning & Documentation (100%)
-- ⚪ Phase 1: Knowledge Hub (0%)
-- ⚪ Phase 2: Impact Portal (0%)
-- ⚪ Phase 3: Living Network (0%)
-- ⚪ Phase 4: Polish & Deploy (0%)
+- ✅ Phase 1: Knowledge Hub (43/53 tracked tasks, 81%)
+- 🟡 Phase 2: Impact Portal (7/33 tracked tasks, 21%)
+- ⚪ Phase 3: Living Network (0/38 tracked tasks, 0%)
+- ⚪ Phase 4: Polish & Deploy (0/31 tracked tasks, 0%)
 
-### Roadmap
+### Next Milestone
+Deliver project repository depth beyond the baseline grid
 
-- **Week 1-2:** Phase 1 - Knowledge Hub
-- **Week 3:** Phase 2 - Impact Portal
-- **Week 4:** Phase 3 - Living Knowledge Network
-- **Week 5:** Phase 4 - Polish & Deploy
+### Next 3 Priorities
+1. Day 1: Add Phase 2 project repository filtering and map toggle groundwork
+2. Day 2: Start project detail page structure and content sections
+3. Day 3: Expand impact portal beyond aggregate cards
+<!-- AUTO-GENERATED:STATUS:END -->
 
 ---
 
@@ -425,10 +440,6 @@ We welcome contributions! Please follow these steps:
 ### Next.js
 - [Next.js Documentation](https://nextjs.org/docs)
 - [Next.js Learn](https://nextjs.org/learn)
-
-### Gemini AI
-- [Gemini API Documentation](https://ai.google.dev/docs)
-- [Gemini Quickstart](https://ai.google.dev/tutorials/get_started_web)
 
 ### D3.js
 - [D3.js Documentation](https://d3js.org/)
@@ -450,19 +461,16 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 
 - **SETI** - For the vision and mission
 - **Next.js Team** - For the amazing framework
-- **Google** - For Gemini AI API
 - **Vercel** - For hosting platform
-- **Supabase** - For database infrastructure
 - **Open Source Community** - For all the amazing tools
 
 ---
 
 ## 📞 Contact & Support
 
-- **Project Lead:** [Your Name]
-- **Email:** your.email@example.com
-- **GitHub:** [@yourusername](https://github.com/yourusername)
-- **Issues:** [GitHub Issues](https://github.com/yourusername/seti-knowledge-hub/issues)
+- **Project Lead:** Dahlan Fauzi
+- **Email:** dahlan.fauzi1991@gmail.com
+- **GitHub:** [@AlnThea](https://github.com/AlnThea)
 
 ---
 
@@ -474,4 +482,4 @@ If you find this project useful, please consider giving it a ⭐ on GitHub!
 
 **Built with ❤️ for Indonesia's Energy Transition**
 
-*Last Updated: 2026-06-17*
+*Last Updated: 2026-06-18*

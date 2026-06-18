@@ -22,11 +22,15 @@ Use it together with `TASKS.md`: this file explains what is actually present in 
 - Basic API routes for publications and projects
 - Responsive header with mobile navigation
 - Professionalized shell layout, card styling, and typography consistency
+- Phase 1 smoke validation via lint, type-check, production build, and local route/API checks
+- Knowledge pagination now clamps out-of-range page values
+- Theme and stakeholder detail routes now prerender via static params
 
 ### Partially done
 - Design system: reusable UI primitives are still thin, but layout, typography, and card patterns are now more consistent
 - Content model: publications now support tags and richer seeded volume, but Phase 2/3 entity depth is still limited
 - Impact portal: page and aggregate metrics exist, but no charts, maps, or story detail pages
+- Mobile QA is improved for the header and core layouts, but there is still no automated viewport regression coverage
 
 ### Not done yet
 - Shadcn/ui integration

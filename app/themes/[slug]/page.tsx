@@ -4,10 +4,21 @@ import { ProjectCard } from "@/components/projects/project-card";
 import { SectionHeading } from "@/components/shared/section-heading";
 import { getThemeDetail } from "@/lib/queries";
 
+const themeSlugs = [
+  "industrial-decarbonization",
+  "green-buildings",
+  "sustainable-energy-finance",
+  "energy-policy"
+] as const;
+
+export function generateStaticParams() {
+  return themeSlugs.map((slug) => ({ slug }));
+}
+
 export default async function ThemeDetailPage({
   params
 }: {
-  params: Promise<{ slug: "industrial-decarbonization" | "green-buildings" | "sustainable-energy-finance" | "energy-policy" }>;
+  params: Promise<{ slug: (typeof themeSlugs)[number] }>;
 }) {
   const { slug } = await params;
   const theme = await getThemeDetail(slug);

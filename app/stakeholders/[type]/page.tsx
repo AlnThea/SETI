@@ -4,10 +4,22 @@ import { ProjectCard } from "@/components/projects/project-card";
 import { SectionHeading } from "@/components/shared/section-heading";
 import { getStakeholderDetail } from "@/lib/queries";
 
+const stakeholderTypes = [
+  "policymaker",
+  "industry",
+  "researcher",
+  "financial-institution",
+  "media"
+] as const;
+
+export function generateStaticParams() {
+  return stakeholderTypes.map((type) => ({ type }));
+}
+
 export default async function StakeholderDetailPage({
   params
 }: {
-  params: Promise<{ type: "policymaker" | "industry" | "researcher" | "financial-institution" | "media" }>;
+  params: Promise<{ type: (typeof stakeholderTypes)[number] }>;
 }) {
   const { type } = await params;
   const stakeholder = await getStakeholderDetail(type);
